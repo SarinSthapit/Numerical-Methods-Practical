@@ -1,6 +1,6 @@
 from prettytable import PrettyTable
 
-def trapezoidalDouble(initial_x, final_x, initial_y, final_y, n, accuracy):
+def simpsons3_8Double(initial_x, final_x, initial_y, final_y, n, accuracy):
     def f(x, y):
         f = x**2 + 2.71828**y
         return f
@@ -19,25 +19,41 @@ def trapezoidalDouble(initial_x, final_x, initial_y, final_y, n, accuracy):
             if(i == 0 or i == n):
                 if(j == 0 or j == n):
                     sum = round(sum + value, accuracy + 1)
-                elif(j<n and j>0):
+                elif(j % 3 == 0):
                     sum = round(sum + 2*value, accuracy + 1)
+                elif(j % 3 != 0 and j>0 and j<n):
+                    sum = round(sum + 3*value, accuracy + 1)
                 else:
                     print("It is out of range.")
 
 
-            elif(i<n and i>0):
+            elif(i % 3 == 0):
                 if(j == 0 or j == n):
                     sum = round(sum + 2*value, accuracy + 1)
-                elif(j<n and j>0):
+                elif(j % 3 == 0):
                     sum = round(sum + 4*value, accuracy + 1)
+                elif(j % 3 != 0 and j>0 and j<n):
+                    sum = round(sum + 6*value, accuracy + 1)
                 else:
                     print("It is out of range.")
+
+
+            elif(i % 3 != 0 and i > 0 and i < n):
+                if(j == 0 or j == n):
+                    sum = round(sum + 3*value, accuracy + 1)
+                elif(j % 3 == 0):
+                    sum = round(sum + 6*value, accuracy + 1)
+                elif(j % 3 != 0 and j>0 and j<n):
+                    sum = round(sum + 9*value, accuracy + 1)
+                else:
+                    print("It is out of range.")
+
 
             else:
                 print("It is out of range.")
 
 
-    solution = round((h * k/4) * sum, accuracy + 1)
+    solution = round((9 * h * k/64) * sum, accuracy + 1)
     print(f"The required solution is {solution}.")
 
 
@@ -48,4 +64,7 @@ final_y = float(input("Enter the final value of y: "))
 n = int(input("Enter the number of subintervals: "))
 accuracy = int(input("Enter the accuracy of the decimal digits: ")) 
 
-trapezoidalDouble(initial_x, final_x, initial_y, final_y, n, accuracy)
+if(n%3 == 0):
+    simpsons3_8Double(initial_x, final_x, initial_y, final_y, n, accuracy)
+else:
+    print("The number of subintervals in Simpson's 3/8 Rule must be even.")

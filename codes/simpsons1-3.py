@@ -19,8 +19,12 @@ def simpsons1_3(initial_x, final_x, n, accuracy):
         elif(i % 2 == 0):
             sum = round(sum + (2*y), accuracy + 1)
 
-        else:
+        elif(i % 2 != 0 and i > 0 and i < n):
             sum = round(sum + (4*y), accuracy + 1)
+
+        else:
+            print("It is out of range.")
+
 
 
     solution = round((h/3) * sum, accuracy + 1)
