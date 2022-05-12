@@ -6,8 +6,6 @@ def simpsons3_8(initial_x, final_x, n, accuracy):
         return f
 
     h = (final_x - initial_x)/n
-    print(h)
-    
 
     sum = 0
     
@@ -15,7 +13,7 @@ def simpsons3_8(initial_x, final_x, n, accuracy):
         x = initial_x + (i * h)
         y = round(f(x), accuracy + 1)
         
-        if(i == 0 or i == 6):
+        if(i == 0 or i == n):
             sum = round(sum + y, accuracy + 1)
 
         elif(i % 3 == 0):
