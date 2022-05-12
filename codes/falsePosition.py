@@ -2,7 +2,7 @@ from sympy import *
 from prettytable import PrettyTable
 import math
 
-def bisection(function, a, b, accuracy):
+def falsePostion(function, a, b, accuracy):
     def f(x):
         f = eval(function)
         return f
@@ -16,8 +16,11 @@ def bisection(function, a, b, accuracy):
    
     while true:
         f_a = f(a)
+        function_a = round(f_a, accuracy + 1)
         f_b = f(b)
-        i = ((a*f_b) - (b*f_a))/(f_b - f_a)
+        function_b = round(f_b, accuracy + 1)
+
+        i = ((a*function_b) - (b*function_a))/(function_b - function_a)
         x = round(i, accuracy + 1)
         f_x = f(x)
         function_x = round(f_x, accuracy + 1)
@@ -27,10 +30,10 @@ def bisection(function, a, b, accuracy):
         if(abs(function_x) < tolerance):
             break
 
-        elif(function_x < 0):
+        elif(function_x * function_b < 0):
             a = x
         
-        elif(function_x > 0):
+        elif(function_x * function_a < 0):
             b = x
 
     print(table)
@@ -49,7 +52,7 @@ def f(x):
     return f
 
 if(f(a) * f(b) < 0):
-    bisection(functionF, a, b, accuracy)
+    falsePostion(functionF, a, b, accuracy)
 else:
     a = float(input("Re-enter the first initial approximation of x: "))
     b = float(input("Re-enter the final initial approximation of x: "))
