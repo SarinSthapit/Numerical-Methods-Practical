@@ -5,15 +5,15 @@ def linearCF(n, accuracy):
     sum_xy = 0
     for i in range(n):
        x = float(input(f"Enter the value of x: "))
-       sum_x += x
-       x_square = x * x
-       sum_x_square += x_square
+       sum_x += round(x, accuracy + 1)
+       x_square = round(x * x, accuracy + 1)
+       sum_x_square += round(x_square, accuracy + 1)
 
        y = float(input("Enter the value of y: "))
-       sum_y = sum_y + y
+       sum_y = round(sum_y + y, accuracy + 1)
 
-       xy = x * y
-       sum_xy += xy
+       xy = round(x * y, accuracy + 1)
+       sum_xy += round(xy, accuracy + 1)
 
     solve(sum_x, sum_y, sum_x_square, sum_xy, n, accuracy)
        
