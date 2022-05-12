@@ -1,4 +1,3 @@
-
 from sympy import *
 from prettytable import PrettyTable
 import math
