@@ -1,7 +1,7 @@
 import numpy as np
 from sympy import *
 
-def forwardInterpolate(n, accuracy):
+def backwardInterpolate(n, accuracy):
     x = np.zeros((n))
     y = np.zeros((n, n))
 
@@ -18,8 +18,8 @@ def forwardInterpolate(n, accuracy):
     variable = symbols('x')
 
     h = round((x[n - 1] - x[0])/(n-1), accuracy + 1)
-    p_x =(( variable - x[0])/h)
-    p = round(( value - x[0])/h, accuracy + 1)
+    p_x =((variable - x[n-1])/h)
+    p = round((value - x[n-1])/h, accuracy + 1)
 
     for c in range(1, n):
         for r in range (0, n - c):
@@ -29,7 +29,7 @@ def forwardInterpolate(n, accuracy):
     def getCoefficients(p, n):
             temp = p
             for i in range (1, n):
-                temp = temp*(p-i)
+                temp = temp*(p+i)
             return temp
 
     def getFactorial(number):
@@ -40,12 +40,13 @@ def forwardInterpolate(n, accuracy):
         else:
             return number * getFactorial(number - 1)
 
-    solution_x = y[0][0]
-    solution = y[0][0]
+    solution_x = y[n-1][0]
+    solution = y[n-1][0]
 
     for i in range(1, n):
-        solution_x = (solution_x + (getCoefficients(p_x, i)*y[0][i]/getFactorial(i)))
-        solution = round(solution + (getCoefficients(p, i)*y[0][i]/getFactorial(i)), accuracy + 1)
+        solution_x = (solution_x + (getCoefficients(p_x, i)*y[n-2][i]/getFactorial(i)))
+        #print(round((getCoefficients(p, i)*y[n-i-1][i]/getFactorial(i)), accuracy + 1))
+        solution = round(solution + (getCoefficients(p, i)*y[n-i-1][i]/getFactorial(i)), accuracy + 1)
 
     print('Equation = ', simplify(solution_x))
     print(f"Solution = {solution}")
@@ -54,5 +55,5 @@ def forwardInterpolate(n, accuracy):
 
 accuracy = int(input("Enter the accuracy of the decimal digits: "))
 n = int(input("Enter the number of data points: "))
-forwardInterpolate(n, accuracy)
+backwardInterpolate(n, accuracy)
 
