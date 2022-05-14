@@ -73,12 +73,6 @@ def finiteDifference(initial_x, initial_y, final_x, final_y, n, accuracy):
     print(solve((final_equation[1], final_equation[2], final_equation[3]), (a, b, c)))
     
 
-'''  for i in range(n):
-        temp = final(0,0,0)
-        matrix[i][3] = -1 * float(temp)
-        print(matrix[i][3])
- '''
-
 accuracy = int(input("Enter the accuracy of the decimal digits: "))
 n = int(input("Enter the number of data points: "))
 
