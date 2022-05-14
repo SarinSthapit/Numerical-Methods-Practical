@@ -8,7 +8,8 @@ def thomas(a, b, c, d, n):
 
     alpha[0] = b[0]
     beta[0] = d[0]/b[0] 
-    x[n - 1] = beta[n - 1]
+    
+    
 
     for i in range(1, n):
         alpha[i] = round(b[i] - ((a[i]*c[i - 1])/(alpha[i - 1])), accuracy + 1)
@@ -19,15 +20,13 @@ def thomas(a, b, c, d, n):
         beta[i] = round((d[i] - (a[i]*beta[i - 1]))/alpha[i], accuracy + 1)
         print(beta[i])
 
-
+    x[n - 1] = beta[n - 1]
+    n1 = n - 1
+    print(f"\nx[{n}] = {x[n1]}")
     for i in range(n-2, -1, -1):
-        if (i == n-2):
-            x[i] = round(beta[i] - ((c[i]*beta[n-1])/(alpha[i])), accuracy + 1)
-        elif(i == 0):
-            x[i] = round(beta[i] - ((c[i]*x[i + 1])/(b[0])), accuracy + 1)
-        else:
-            x[i] = round(beta[i] - ((c[i]*x[i + 1])/(alpha[i])), accuracy + 1)
-        print(x[i])
+        x[i] = round(beta[i] - ((c[i]*x[i + 1])/(alpha[i])), accuracy + 1)
+        j = i + 1
+        print(f"x[{j}] = {x[i]}")
 
 
 
