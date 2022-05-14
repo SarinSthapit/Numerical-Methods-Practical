@@ -73,8 +73,8 @@ def F_x(x, y):
     return F_x
 
 def G_x(x, y):
-    G = eval(derivativeG_wrt_x)
-    return G
+    G_y = eval(derivativeG_wrt_x)
+    return G_y
 
 def F_y(x, y):
     F_y = eval(derivativeF_wrt_y)
